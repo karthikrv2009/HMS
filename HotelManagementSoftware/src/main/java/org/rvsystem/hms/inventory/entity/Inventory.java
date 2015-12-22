@@ -51,6 +51,7 @@ public class Inventory {
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="inventory")
 	private Set<Room> room;
 
+	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="inventory")
 	private Set<InventoryImage> inventoryimage;
 
