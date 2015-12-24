@@ -56,6 +56,10 @@ public class EmployeService {
 	}
 	
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/getemployebyname/{firstname}/{lastname}",method=RequestMethod.GET)
+	public List<Employe> getemployebyname(@PathVariable("firstname") String firstname,@PathVariable("lastname") String lastname){
+		return employeDAO.getEmployeByFirstandLastName(firstname, lastname);
+	}
 	
 }

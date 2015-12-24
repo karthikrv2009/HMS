@@ -31,7 +31,7 @@ public class Employe {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "EMPLOYE_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMPLOYE_ID")
 	@SequenceGenerator(name = "EMPLOYE_ID", sequenceName = "EMPLOYE_ID")
 	@Column(name = "EMPLOYE_ID", unique = true, nullable = false)
 	private Integer employeid;
@@ -58,37 +58,6 @@ public class Employe {
 	@Column(name = "ACTIVE")
 	private boolean active;
 
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="employe")
-	private Set<EmployeIdentification> employeIdentification;
-	
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="employe")
-	private Set<Room> room;
-	
-
-
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="employe")
-	private Set<Inventory> inventory;
-	
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="employe")
-	private Set<Item> item;
-	
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="employe")
-	private Set<ItemTransaction> itemTransaction;
-	
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="employe")
-	private Set<Customer> customer;
-	
-	@JsonIgnore
-	@OneToOne(mappedBy="employe",fetch=FetchType.LAZY)
-	private EmployeAddress employeaddress;
-
-	
 	public Integer getEmployeid() {
 		return employeid;
 	}
@@ -105,7 +74,6 @@ public class Employe {
 		this.firstname = firstname;
 	}
 
-	
 	public String getLastname() {
 		return lastname;
 	}
@@ -152,64 +120,6 @@ public class Employe {
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	public Set<EmployeIdentification> getEmployeIdentification() {
-		return employeIdentification;
-	}
-
-	public void setEmployeIdentification(
-			Set<EmployeIdentification> employeIdentification) {
-		this.employeIdentification = employeIdentification;
-	}
-
-	public Set<Room> getRoom() {
-		return room;
-	}
-
-	public void setRoom(Set<Room> room) {
-		this.room = room;
-	}
-
-
-	public Set<Inventory> getInventory() {
-		return inventory;
-	}
-
-	public void setInventory(Set<Inventory> inventory) {
-		this.inventory = inventory;
-	}
-
-	public Set<Item> getItem() {
-		return item;
-	}
-
-	public void setItem(Set<Item> item) {
-		this.item = item;
-	}
-
-	public Set<ItemTransaction> getItemTransaction() {
-		return itemTransaction;
-	}
-
-	public void setItemTransaction(Set<ItemTransaction> itemTransaction) {
-		this.itemTransaction = itemTransaction;
-	}
-
-	public Set<Customer> getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Set<Customer> customer) {
-		this.customer = customer;
-	}
-
-	public EmployeAddress getEmployeaddress() {
-		return employeaddress;
-	}
-
-	public void setEmployeaddress(EmployeAddress employeaddress) {
-		this.employeaddress = employeaddress;
 	}
 
 	@Override

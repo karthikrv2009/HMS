@@ -43,8 +43,6 @@ public class RatePlan {
 	@JoinColumn(name="PROPERTY_ID",nullable=false)
 	private Property property;
 	
-	@ManyToMany(mappedBy="rateplans")
-	private Set<Inventory> inventories;
 	
 	public int getRatePlanId() {
 		return ratePlanId;
@@ -70,26 +68,13 @@ public class RatePlan {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public Set<Inventory> getInventory() {
-		return inventories;
-	}
-	public void setInventory(Set<Inventory> inventory) {
-		this.inventories = inventory;
-	}
-
-	public Property getProperty() {
-		return property;
-	}
-	public void setProperty(Property property) {
-		this.property = property;
-	}
-
 	@Override
 	public String toString() {
-		return "RatePlan [ratePlanId=" + ratePlanId + ", priority=" + priority + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", inventory=" + inventories+ ", property=" + property
-				+ "]";
+		return "RatePlan [ratePlanId=" + ratePlanId + ", priority=" + priority
+				+ ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", property=" + property + "]";
 	}
 
+	
 
 }
