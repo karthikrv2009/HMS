@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.rvsystem.hms.reservation.dao.ReservationTransactionDAO;
-import org.rvsystem.hms.reservation.entity.ReservationTransaction;
+import org.rvsystem.hms.item.dao.ItemImageDAO;
+import org.rvsystem.hms.item.entity.ItemImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -21,32 +21,32 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ItemImageService {
 
 	@Autowired
-	ReservationTransactionDAO reservationTransactionDAO;
+	ItemImageDAO itemImageDAO;
 	
 
 	@ResponseBody
 	@RequestMapping(value="/findAll",method=RequestMethod.GET)
-	public List<ReservationTransaction> findAll(){
-		return reservationTransactionDAO.findAll();
+	public List<ItemImage> findAll(){
+		return itemImageDAO.findAll();
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ReservationTransaction findOne(@PathVariable int id){
-		return reservationTransactionDAO.findOne(id);
+	public ItemImage findOne(@PathVariable int id){
+		return itemImageDAO.findOne(id);
 	}
 	
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(value="/save",method=RequestMethod.POST)
-	public void save(@RequestBody ReservationTransaction reservationTransaction,HttpServletResponse response){
-		reservationTransactionDAO.save(reservationTransaction);
+	public void save(@RequestBody ItemImage itemImage,HttpServletResponse response){
+		itemImageDAO.save(itemImage);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	public ReservationTransaction update(@PathVariable int id,@RequestBody ReservationTransaction reservationTransaction){
-		return reservationTransactionDAO.save(reservationTransaction);
+	public ItemImage update(@PathVariable int id,@RequestBody ItemImage itemImage){
+		return itemImageDAO.save(itemImage);
 	}
 
 

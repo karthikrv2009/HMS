@@ -1,6 +1,8 @@
 package org.rvsystem.hms.rateplan.entity;
 
 import java.util.Date;
+import java.util.Set;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.rvsystem.hms.inventory.entity.Inventory;
+import org.rvsystem.hms.property.entity.Property;
 
 @Entity
 @Table(name="RATEPLAN")
@@ -35,8 +40,11 @@ public class RatePlan {
 	private Date endDate;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="INVENTORY_ID",nullable=false)
-	private Inventory inventory;
+	@JoinColumn(name="PROPERTY_ID",nullable=false)
+	private Property property;
+	
+	@ManyToMany(mappedBy="rateplans")
+	private Set<Inventory> inventories;
 	
 	public int getRatePlanId() {
 		return ratePlanId;
@@ -62,17 +70,24 @@ public class RatePlan {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public Inventory getInventory() {
-		return inventory;
+	public Set<Inventory> getInventory() {
+		return inventories;
 	}
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
+	public void setInventory(Set<Inventory> inventory) {
+		this.inventories = inventory;
+	}
+
+	public Property getProperty() {
+		return property;
+	}
+	public void setProperty(Property property) {
+		this.property = property;
 	}
 
 	@Override
 	public String toString() {
 		return "RatePlan [ratePlanId=" + ratePlanId + ", priority=" + priority + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", inventory=" + inventory
+				+ startDate + ", endDate=" + endDate + ", inventory=" + inventories+ ", property=" + property
 				+ "]";
 	}
 

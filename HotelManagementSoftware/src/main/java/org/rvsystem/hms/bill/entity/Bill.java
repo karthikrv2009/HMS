@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.rvsystem.hms.customer.entity.Customer;
 import org.rvsystem.hms.employe.entity.Employe;
 import org.rvsystem.hms.item.entity.ItemTransaction;
+import org.rvsystem.hms.property.entity.Property;
 import org.rvsystem.hms.reservation.entity.Reservation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -56,6 +57,11 @@ public class Bill {
 	@JoinColumn(name="CUSTOMER_ID",nullable=false)
 	private Customer customer;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="PROPERTY_ID",nullable=false)
+	private Property property;
+	
+	
 	public int getBillid() {
 		return billid;
 	}
@@ -120,13 +126,21 @@ public class Bill {
 		this.customer = customer;
 	}
 
+	public Property getProperty() {
+		return property;
+	}
+
+	public void setProperty(Property property) {
+		this.property = property;
+	}
+
 	@Override
 	public String toString() {
 		return "Bill [billid=" + billid + ", billno=" + billno
 				+ ", creationdate=" + creationdate + ", completiondate="
 				+ completiondate + ", itemTransaction=" + itemTransaction
 				+ ", reservation=" + reservation + ", employe=" + employe
-				+ ", customer=" + customer + "]";
+				+ ", customer=" + customer + ", property=" + property + "]";
 	}
 
 	

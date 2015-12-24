@@ -19,6 +19,7 @@ import org.rvsystem.hms.bill.entity.Bill;
 import org.rvsystem.hms.customer.entity.Customer;
 import org.rvsystem.hms.employe.entity.Employe;
 import org.rvsystem.hms.inventory.entity.Room;
+import org.rvsystem.hms.property.entity.Property;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -47,7 +48,6 @@ public class Reservation {
 	@Column(name = "TYPE")
 	private String type;
 	
-	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="reservation")
 	private Set<Bill> bill;
 	
@@ -62,6 +62,11 @@ public class Reservation {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ROOM_ID",nullable=false)
 	private Room room;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="PROPERTY_ID",nullable=false)
+	private Property property;
+
 
 	public int getReservationid() {
 		return reservationid;
@@ -143,13 +148,21 @@ public class Reservation {
 		this.room = room;
 	}
 
+	public Property getProperty() {
+		return property;
+	}
+
+	public void setProperty(Property property) {
+		this.property = property;
+	}
+
 	@Override
 	public String toString() {
 		return "Reservation [reservationid=" + reservationid
 				+ ", creationdate=" + creationdate + ", startdate=" + startdate
 				+ ", enddate=" + enddate + ", status=" + status + ", type="
 				+ type + ", bill=" + bill + ", customer=" + customer
-				+ ", employe=" + employe + ", room=" + room + "]";
+				+ ", employe=" + employe + ", room=" + room + ", property=" + property + "]";
 	}
 	
 	

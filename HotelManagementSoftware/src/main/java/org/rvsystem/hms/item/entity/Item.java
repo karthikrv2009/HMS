@@ -1,6 +1,5 @@
 package org.rvsystem.hms.item.entity;
 
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,13 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.rvsystem.hms.employe.entity.Employe;
+import org.rvsystem.hms.property.entity.Property;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="ITEM")
@@ -37,17 +36,14 @@ public class Item {
 	@Column(name="PRICE")
 	private double price;
 
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="item")
-	private Set<ItemImage> itemimage;
 
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="item")
-	private Set<ItemTransaction> itemtransaction;
-	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="EMPLOYE_ID",nullable=false)
 	private Employe employe;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="PROPERTY_ID",nullable=false)
+	private Property property;
 
 	public int getItemid() {
 		return itemid;
@@ -81,22 +77,6 @@ public class Item {
 		this.price = price;
 	}
 
-	public Set<ItemImage> getItemimage() {
-		return itemimage;
-	}
-
-	public void setItemimage(Set<ItemImage> itemimage) {
-		this.itemimage = itemimage;
-	}
-
-	public Set<ItemTransaction> getItemtransaction() {
-		return itemtransaction;
-	}
-
-	public void setItemtransaction(Set<ItemTransaction> itemtransaction) {
-		this.itemtransaction = itemtransaction;
-	}
-
 	public Employe getEmploye() {
 		return employe;
 	}
@@ -105,12 +85,22 @@ public class Item {
 		this.employe = employe;
 	}
 
+	
+	
+	public Property getProperty() {
+		return property;
+	}
+
+	public void setProperty(Property property) {
+		this.property = property;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Item [itemid=" + itemid + ", itemname=" + itemname
 				+ ", itemdescription=" + itemdescription + ", price=" + price
-				+ ", itemimage=" + itemimage + ", itemtransaction="
-				+ itemtransaction + ", employe=" + employe + "]";
+				+ ", employe=" + employe +  ", property=" + property + "]";
 	}
 	
 

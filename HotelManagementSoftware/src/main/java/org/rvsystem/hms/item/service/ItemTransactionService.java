@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.rvsystem.hms.reservation.dao.ReservationTransactionDAO;
-import org.rvsystem.hms.reservation.entity.ReservationTransaction;
+import org.rvsystem.hms.item.dao.ItemTransactionDAO;
+import org.rvsystem.hms.item.entity.ItemTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -22,32 +22,32 @@ public class ItemTransactionService {
 
 
 	@Autowired
-	ReservationTransactionDAO reservationTransactionDAO;
+	ItemTransactionDAO itemTransactionDAO;
 	
 
 	@ResponseBody
 	@RequestMapping(value="/findAll",method=RequestMethod.GET)
-	public List<ReservationTransaction> findAll(){
-		return reservationTransactionDAO.findAll();
+	public List<ItemTransaction> findAll(){
+		return itemTransactionDAO.findAll();
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ReservationTransaction findOne(@PathVariable int id){
-		return reservationTransactionDAO.findOne(id);
+	public ItemTransaction findOne(@PathVariable int id){
+		return itemTransactionDAO.findOne(id);
 	}
 	
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(value="/save",method=RequestMethod.POST)
-	public void save(@RequestBody ReservationTransaction reservationTransaction,HttpServletResponse response){
-		reservationTransactionDAO.save(reservationTransaction);
+	public void save(@RequestBody ItemTransaction itemTransaction,HttpServletResponse response){
+		itemTransactionDAO.save(itemTransaction);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	public ReservationTransaction update(@PathVariable int id,@RequestBody ReservationTransaction reservationTransaction){
-		return reservationTransactionDAO.save(reservationTransaction);
+	public ItemTransaction update(@PathVariable int id,@RequestBody ItemTransaction itemTransaction){
+		return itemTransactionDAO.save(itemTransaction);
 	}
 
 }

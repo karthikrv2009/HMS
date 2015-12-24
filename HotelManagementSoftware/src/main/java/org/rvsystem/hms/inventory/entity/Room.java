@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.rvsystem.hms.employe.entity.Employe;
+import org.rvsystem.hms.property.entity.Property;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,6 +41,10 @@ public class Room {
 	@JoinColumn(name="INVENTORY_ID",nullable=false)
 	private Inventory inventory;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="PROPERTY_ID",nullable=false)
+	private Property property;
+	
 	public int getRoomid() {
 		return roomid;
 	}
@@ -80,11 +85,19 @@ public class Room {
 		this.inventory = inventory;
 	}
 
+	public Property getProperty() {
+		return property;
+	}
+
+	public void setProperty(Property property) {
+		this.property = property;
+	}
+	
 	@Override
 	public String toString() {
 		return "Room [roomid=" + roomid + ", roomno=" + roomno + ", status="
-				+ status + ", employe=" + employe + ", inventory=" + inventory
-				+ "]";
+				+ status + ", employe=" + employe + ", inventory=" + inventory +
+				", property=" + property+ "]";
 	}
 
 

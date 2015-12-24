@@ -2,6 +2,7 @@ package org.rvsystem.hms.inventory.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,12 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.rvsystem.hms.employe.entity.Employe;
+import org.rvsystem.hms.organization.entity.Organization;
+import org.rvsystem.hms.rateplan.entity.RatePlan;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -45,11 +50,30 @@ public class Inventory {
 	
 	@Column(name = "PEOPLE")
 	private int people;
+	@ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name="RATEPLAN_INVENTORY", 
+                joinColumns={@JoinColumn(name="INVENTORY_ID")}, 
+                inverseJoinColumns={@JoinColumn(name="RATEPLAN_ID")})
 	
+	private Set<RatePlan> rateplans;
+	
+	public Set<RatePlan> getRateplans() {
+		return rateplans;
+	}
+
+	public void setRateplans(Set<RatePlan> rateplans) {
+		this.rateplans = rateplans;
+	}
 
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="inventory")
 	private Set<Room> room;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ORG_ID",nullable=false)
+	private Organization organization;
+
+
 
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="inventory")
@@ -139,13 +163,21 @@ public class Inventory {
 		this.employe = employe;
 	}
 
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+	
 	@Override
 	public String toString() {
 		return "Inventory [inventoryid=" + inventoryid + ", description="
 				+ description + ", category=" + category + ", status=" + status
 				+ ", price=" + price + ", name=" + name + ", people=" + people
 				+ ", room=" + room + ", inventoryimage=" + inventoryimage
-				+ ", employe=" + employe + "]";
+				+ ", employe=" + employe + ", organization=" + organization + ", rateplans=" + rateplans + "]";
 	}
 	
 	

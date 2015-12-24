@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.rvsystem.hms.reservation.dao.ReservationTransactionDAO;
-import org.rvsystem.hms.reservation.entity.Reservation;
 import org.rvsystem.hms.reservation.entity.ReservationTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

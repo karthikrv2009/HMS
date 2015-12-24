@@ -17,7 +17,6 @@ import org.rvsystem.hms.bill.entity.Bill;
 import org.rvsystem.hms.customer.entity.Customer;
 import org.rvsystem.hms.employe.entity.Employe;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ITEMTRANSACTION")
@@ -52,17 +51,14 @@ public class ItemTransaction {
 	private Customer item;
 
 	
-	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="CUSTOMER_ID",nullable=false)
 	private Customer customer;
 	
-	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="EMPLOYE_ID",nullable=false)
 	private Employe employe;
 	
-	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="BILL_ID",nullable=false)
 	private Bill bill;

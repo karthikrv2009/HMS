@@ -66,9 +66,7 @@ public class Employe {
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="employe")
 	private Set<Room> room;
 	
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="employe")
-	private Set<Bill> bill;
+
 
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="employe")
@@ -173,13 +171,6 @@ public class Employe {
 		this.room = room;
 	}
 
-	public Set<Bill> getBill() {
-		return bill;
-	}
-
-	public void setBill(Set<Bill> bill) {
-		this.bill = bill;
-	}
 
 	public Set<Inventory> getInventory() {
 		return inventory;
